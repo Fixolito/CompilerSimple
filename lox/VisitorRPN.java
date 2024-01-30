@@ -5,6 +5,17 @@ class VisitorRPN implements Expr.Visitor<String> {
         return expr.accept(this);
     }
 
+    /*
+    @Override
+    public String visitTernaryExpr(Expr.Ternary expr) {
+        if (expr.operator.type == TokenType.TERNARY_CONDITIONAL_OPERATOR) {
+            return expr.left.accept(this) + " ? " + expr.middle.accept(this)
+                    + " : " + expr.right.accept(this);
+        }
+        return  "Unknown ternary expression.";
+    }
+    */
+
     @Override
     public String visitBinaryExpr(Expr.Binary expr) {
         return expr.left.accept(this) + ' ' + expr.right.accept(this) + ' ' + expr.operator.lexeme;

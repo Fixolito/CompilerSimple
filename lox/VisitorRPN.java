@@ -5,16 +5,10 @@ class VisitorRPN implements Expr.Visitor<String> {
         return expr.accept(this);
     }
 
-    /*
     @Override
-    public String visitTernaryExpr(Expr.Ternary expr) {
-        if (expr.operator.type == TokenType.TERNARY_CONDITIONAL_OPERATOR) {
-            return expr.left.accept(this) + " ? " + expr.middle.accept(this)
-                    + " : " + expr.right.accept(this);
-        }
-        return  "Unknown ternary expression.";
+    public String visitAssignExpr(Expr.Assign expr) {
+        return expr.name + " = " + expr.value.toString();
     }
-    */
 
     @Override
     public String visitBinaryExpr(Expr.Binary expr) {
@@ -36,6 +30,12 @@ class VisitorRPN implements Expr.Visitor<String> {
     public String visitUnaryExpr(Expr.Unary expr) {
         return expr.operator.lexeme + expr.right.accept(this);
     }
+
+    @Override
+    public String visitVariableExpr(Expr.Variable expr) {
+        return null;
+    }
+
 
     private String parenthesize(String name, Expr... exprs) {
         StringBuilder builder = new StringBuilder();
